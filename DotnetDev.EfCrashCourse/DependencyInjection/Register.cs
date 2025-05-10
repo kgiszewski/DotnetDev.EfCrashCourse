@@ -9,7 +9,7 @@ public static class Register
     {
         services.AddDbContext<AppDbContext>((serviceProvider, options) =>
         {
-            options.UseNpgsql("");
+            options.UseNpgsql($"Host=localhost:5432;Database=postgres;Username=postgres;Password=postgres;");
         });
     }
 }
