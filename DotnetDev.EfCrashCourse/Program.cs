@@ -13,6 +13,7 @@ var dbContext = provider.GetRequiredService<AppDbContext>();
 
 dbContext.Customers.Add(new Customer
 {
+    Id = Guid.NewGuid(),
     FirstName = "Homer",
     LastName = "Simpson"
 });

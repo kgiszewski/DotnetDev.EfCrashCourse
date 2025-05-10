@@ -7,9 +7,10 @@ public static class Register
 {
     public static void AddPostgresDatabase(this IServiceCollection services)
     {
-        services.AddDbContext<AppDbContext>((serviceProvider, options) =>
+        services.AddDbContext<AppDbContext>((_, options) =>
         {
-            options.UseNpgsql($"Host=localhost:5432;Database=postgres;Username=postgres;Password=postgres;");
+            options.UseNpgsql($"Host=localhost:5432;Database=postgres;Username=postgres;Password=postgres;")
+                .UseSnakeCaseNamingConvention();
         });
     }
 }
