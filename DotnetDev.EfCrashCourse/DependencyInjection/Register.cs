@@ -9,6 +9,7 @@ public static class Register
     {
         services.AddDbContext<AppDbContext>((_, options) =>
         {
+            //configures us to use a postgres instance with the given connection string
             options.UseNpgsql($"Host=localhost:5432;Database=postgres;Username=postgres;Password=postgres;")
                 .UseSnakeCaseNamingConvention();
         });
