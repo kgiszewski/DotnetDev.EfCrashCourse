@@ -9,7 +9,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         //our schema/table
         builder.ToTable("orders", "billing");
-        //indicating we have one customer than can have many orders and is keyed with CustomerId
-        builder.HasOne<Customer>().WithMany().HasForeignKey(x => x.CustomerId);
+        builder.HasKey(x => x.Id);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace DotnetDev.EfCrashCourse.Entities;
 
-[PrimaryKey("Id")]
 public class Customer
 {
     public Guid Id { get; set; }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DotnetDev.EfCrashCourse.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250511182728_AddOrders")]
-    partial class AddOrders
+    [Migration("20250511191341_AddInitial")]
+    partial class AddInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -78,12 +78,14 @@ namespace DotnetDev.EfCrashCourse.Migrations
 
             modelBuilder.Entity("DotnetDev.EfCrashCourse.Entities.Order", b =>
                 {
-                    b.HasOne("DotnetDev.EfCrashCourse.Entities.Customer", null)
+                    b.HasOne("DotnetDev.EfCrashCourse.Entities.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_orders_customers_customer_id");
+
+                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

@@ -75,12 +75,14 @@ namespace DotnetDev.EfCrashCourse.Migrations
 
             modelBuilder.Entity("DotnetDev.EfCrashCourse.Entities.Order", b =>
                 {
-                    b.HasOne("DotnetDev.EfCrashCourse.Entities.Customer", null)
+                    b.HasOne("DotnetDev.EfCrashCourse.Entities.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_orders_customers_customer_id");
+
+                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

@@ -51,7 +51,38 @@ var customProjection = await dbContext
     .Select(x => new { x.Id, x.FirstName })
     //materialize it
     .SingleAsync(); //Anonymous object Id: <guid>, FirstName: Bart
-    
 
+//add an order
+dbContext.Add(new Order
+{
+    CustomerId = customerId,
+    Quantity = 1,
+    Amount = 1.23m
+});
+
+await dbContext.SaveChangesAsync();
+
+//works, but not ideal
+var includedListOfOrdersFromPeopleNamedBart = await dbContext
+                       .Orders
+                       .Include(x => x.Customer)
+                       .Where(x => x.Customer.FirstName == "Bart")
+                       .ToListAsync();
+
+//inner join
+var joinedListOfOrdersFromPeopleNamedBart = await dbContext
+    .Orders
+    .Join<Order, Customer, Guid, object>(
+        dbContext.Customers,
+        x => x.CustomerId,
+        x => x.Id,
+        (orderTable, customerTable) => new
+        {
+            //things to select
+            orderTable.CustomerId,
+            customerTable.FirstName
+        }
+    //anon list
+    ).ToListAsync();
 
 Console.ReadKey();
