@@ -85,4 +85,15 @@ var joinedListOfOrdersFromPeopleNamedBart = await dbContext
     //anon list
     ).ToListAsync();
 
+var result = await dbContext.Database.SqlQuery<Customer>($"""
+                                                       SELECT *
+                                                       FROM billing.customers
+                                                    """).ToListAsync();
+
+await dbContext.Customers
+    .ExecuteUpdateAsync(
+        x => x.SetProperty(y => y.FirstName, "Homer")
+    );
+
+
 Console.ReadKey();
